@@ -38,8 +38,18 @@ except ImportError:
 # Default maximum number of frames to keep in the ring buffer.
 DEFAULT_MAX_FRAMES = 30
 
-# Frames-per-second when rendering the video.  Lower FPS = smaller file,
-# and for a supervisory LLM the screen doesn't need to look "smooth".
+# Frames-per-second when rendering the video.
+#
+# FPS tradeoffs (configurable via ``video_fps`` in settings.json):
+#
+#   * **1 FPS** – Gemini samples video at ~1 FPS internally, so every
+#     captured frame is guaranteed to be seen.  30 frames → 30-second
+#     video.  Best for accuracy when every state change matters.
+#   * **2 FPS** (default) – good balance.  30 frames → 15-second video.
+#     Gemini sees roughly every other frame, which is fine for typical
+#     desktop-automation tasks where consecutive frames are similar.
+#   * **4+ FPS** – shorter video / faster upload, but Gemini may skip
+#     more frames.  Useful if bandwidth is limited.
 DEFAULT_VIDEO_FPS = 2
 
 

@@ -79,6 +79,10 @@ class MoondreamHybrid(Model):
         planning_model         – Gemini model for API planning
                                  (default: gemini-2.0-flash).
         api_review_interval    – Local steps between API reviews (default: 3).
+        video_fps              – Playback FPS for the video sent to the API
+                                 LLM (default: 2).  Lower values (e.g. 1)
+                                 ensure Gemini sees every frame; higher
+                                 values produce shorter videos.
     """
 
     def __init__(self, model_name, base_url, api_key, context, screen=None):
@@ -112,7 +116,8 @@ class MoondreamHybrid(Model):
         ]
 
         # --- Frame buffer for video-based API context ---
-        self._frame_buffer = FrameBuffer()
+        video_fps = int(settings.get('video_fps', 0)) or None  # 0/absent → default
+        self._frame_buffer = FrameBuffer(fps=video_fps) if video_fps else FrameBuffer()
 
         # --- Pipeline state ---
         self._api_review_interval = int(settings.get(
