@@ -124,7 +124,7 @@ class FrameBuffer:
         clip = ImageSequenceClip(np_frames, fps=self._fps)
 
         # Write to a temporary file (moviepy needs a real file for MP4)
-        with tempfile.NamedTemporaryFile(suffix='.mp4', delete=True) as tmp:
+        with tempfile.NamedTemporaryFile(suffix='.mp4') as tmp:
             clip.write_videofile(
                 tmp.name,
                 codec='libx264',

@@ -359,9 +359,9 @@ class MoondreamHybrid(Model):
                 f"CURRENT SCREEN STATE (analyzed by local vision model):\n"
                 f"{screen_description}\n\n"
                 f"{request_data}"
-                f"\n\nAttached is a video of recent screen activity "
-                f"(gridded screenshots with cell overlay). "
-                f"Use it to understand what happened and plan next steps:"
+                "\n\nAttached is a video of recent screen activity "
+                "(gridded screenshots with cell overlay). "
+                "Use it to understand what happened and plan next steps:"
             )
 
             # Gemini inline_data: send MP4 video for temporal context
@@ -379,7 +379,7 @@ class MoondreamHybrid(Model):
             f"CURRENT SCREEN STATE (analyzed by local vision model):\n"
             f"{screen_description}\n\n"
             f"{request_data}"
-            f"\n\nHere is a screenshot of the user's screen:"
+            "\n\nHere is a screenshot of the user's screen:"
         )
 
         base64_img = gridded_screenshot_to_base64(gridded_img)
