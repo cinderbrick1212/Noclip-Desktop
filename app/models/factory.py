@@ -1,6 +1,7 @@
 from models.gpt4o import GPT4o
 from models.gpt4v import GPT4v
 from models.gpt5 import GPT5
+from models.moondream_hybrid import MoondreamHybrid
 from models.openai_computer_use import OpenAIComputerUse
 from models.gemini import Gemini
 
@@ -12,7 +13,9 @@ class ModelFactory:
         args: (base_url, api_key, context, screen)
         """
         try:
-            if model_name == 'gpt-4o' or model_name == 'gpt-4o-mini':
+            if model_name == 'moondream2':
+                return MoondreamHybrid(model_name, *args)
+            elif model_name == 'gpt-4o' or model_name == 'gpt-4o-mini':
                 return GPT4o(model_name, *args)
             elif model_name == 'computer-use-preview':
                 return OpenAIComputerUse(model_name, *args)
