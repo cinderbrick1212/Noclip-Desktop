@@ -78,6 +78,7 @@ class Claude:
             return json.loads(text[start_index:end_index + 1].strip())
         except Exception as e:
             print(f'Error parsing Claude response: {e}')
+            print(f'Raw response text: {text[:500]}')
             return {}
 
     def cleanup(self):

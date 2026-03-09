@@ -59,6 +59,6 @@ class Settings:
             if key in settings and settings[key]:
                 try:
                     settings[key] = base64.b64decode(settings[key]).decode()
-                except Exception:
-                    pass  # Already decoded or invalid
+                except (ValueError, base64.binascii.Error):
+                    pass  # Value may already be plain text (e.g. first run)
         return settings

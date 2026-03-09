@@ -401,7 +401,7 @@ class WebUI:
                     "content": "\n".join(updates),
                 }
                 yield history, ""
-            except Exception:
+            except queue.Empty:
                 continue
 
         # Drain any remaining messages
@@ -409,7 +409,7 @@ class WebUI:
             try:
                 status = core.status_queue.get_nowait()
                 updates.append(str(status))
-            except Exception:
+            except queue.Empty:
                 break
 
         if updates:

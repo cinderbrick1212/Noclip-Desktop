@@ -66,4 +66,5 @@ class ChatCompletionsModel(Model):
             return json.loads(text[start_index:end_index + 1].strip())
         except Exception as e:
             print(f'Error parsing Chat Completions response: {e}')
+            print(f'Raw response text: {text[:500]}')
             return {}
