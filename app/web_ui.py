@@ -32,6 +32,7 @@ RETENTION_POLICIES = [
     'Delete immediately', 'Keep 1 day', 'Keep 30 days', 'Keep forever',
 ]
 BROWSERS = ['', 'Chrome', 'Firefox', 'Safari', 'Edge']
+VOICE_TRANSCRIPTION_MODEL = 'gemini-2.0-flash'
 
 # Keywords used by the settings search filter (one list per accordion).
 _SEARCH_KEYWORDS: list[list[str]] = [
@@ -714,7 +715,7 @@ class WebUI:
         mime_type = mime_map.get(ext, 'audio/wav')
 
         response = client.models.generate_content(
-            model='gemini-2.0-flash',
+            model=VOICE_TRANSCRIPTION_MODEL,
             contents=[
                 types.Part.from_bytes(
                     data=audio_bytes,

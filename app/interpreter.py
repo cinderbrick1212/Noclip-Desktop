@@ -72,9 +72,10 @@ class Interpreter:
 
         # Skip keyboard/mouse commands when controls are disabled
         if not self.controls_enabled:
-            print(f'[Controls disabled] Skipped: {function_name}({parameters})')
-            self.status_queue.put(f'🔒 Skipped (controls off): {function_name}')
-            return
+            if function_name == 'click_cell' or hasattr(pyautogui, function_name):
+                print(f'[Controls disabled] Skipped: {function_name}({parameters})')
+                self.status_queue.put(f'🔒 Skipped (controls off): {function_name}')
+                return
 
         # Handle click_cell: translate cell name to screen coordinates and click
         if function_name == 'click_cell':
