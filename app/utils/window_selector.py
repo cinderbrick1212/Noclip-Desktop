@@ -100,6 +100,8 @@ def get_full_screen_rect() -> tuple[int, int, int, int]:
 
 # Maximum display length for window titles in the capture picker.
 _MAX_TITLE_DISPLAY = 45
+_ELLIPSIS = "…"
+_NO_WINDOWS_LABEL = "No windows detected"
 
 
 def list_screens() -> list[dict]:
@@ -170,7 +172,7 @@ def get_capture_choices() -> tuple[list[str], dict[str, Optional[tuple[int, int,
     for win in windows:
         title = win["title"]
         if len(title) > _MAX_TITLE_DISPLAY:
-            title = title[:_MAX_TITLE_DISPLAY - 1] + "…"
+            title = title[:_MAX_TITLE_DISPLAY - len(_ELLIPSIS)] + _ELLIPSIS
         label = f"🪟 {title}"
         # Deduplicate labels
         if label in label_to_rect:

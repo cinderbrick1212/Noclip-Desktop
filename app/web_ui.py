@@ -22,7 +22,7 @@ from typing import Optional
 import gradio as gr
 
 from version import version
-from utils.window_selector import get_capture_choices
+from utils.window_selector import get_capture_choices, _NO_WINDOWS_LABEL
 
 # ── Constants ────────────────────────────────────────────────────────
 PROVIDERS = ['OpenAI', 'Gemini', 'Claude', 'OpenRouter', 'Ollama']
@@ -188,7 +188,7 @@ class WebUI:
                         )
                     else:
                         window_radio = gr.Radio(
-                            choices=['No windows detected'],
+                            choices=[_NO_WINDOWS_LABEL],
                             value=None,
                             label='Select a window',
                             info='Window enumeration requires Windows OS. '
@@ -219,7 +219,7 @@ class WebUI:
     def _apply_capture_selection(self, screen_sel, window_sel):
         """Apply the selected capture region to Core."""
         # Window selection takes priority if set
-        selection = window_sel if (window_sel and not window_sel.startswith("No windows")) else screen_sel
+        selection = window_sel if (window_sel and window_sel != _NO_WINDOWS_LABEL) else screen_sel
 
         if not selection:
             return "⚠️ No selection made"
@@ -258,7 +258,7 @@ class WebUI:
             )
         else:
             window_update = gr.update(
-                choices=['No windows detected'],
+                choices=[_NO_WINDOWS_LABEL],
                 value=None,
                 interactive=False,
             )
