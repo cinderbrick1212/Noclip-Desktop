@@ -1,12 +1,12 @@
-# Open Interface
+# Noclip Desktop
 
 <picture>
-	<img src="assets/icon.png" align="right" alt="Open Interface Logo" width="120" height="120">
+	<img src="assets/icon.png" align="right" alt="Noclip Desktop Logo" width="120" height="120">
 </picture>
 
 ### Control Your Computer Using LLMs
 
-Open Interface
+Noclip Desktop
 - Self-drives your computer by sending your requests to an LLM backend (GPT-4o, Gemini, Claude, etc) to figure out the required steps.
 - Automatically executes these steps by simulating keyboard and mouse input.
 - Course-corrects by sending the LLM backend updated screenshots of the progress as needed.
@@ -16,15 +16,15 @@ Open Interface
 <div align="center">
 <h4>Full Autopilot for All Computers Using LLMs</h4>
 
-  [![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/AmberSahdev/Open-Interface?tab=readme-ov-file#install)
-  [![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/AmberSahdev/Open-Interface?tab=readme-ov-file#install)
-  [![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/AmberSahdev/Open-Interface?tab=readme-ov-file#install)
+  [![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/cinderbrick1212/Noclip-Desktop?tab=readme-ov-file#install)
+  [![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/cinderbrick1212/Noclip-Desktop?tab=readme-ov-file#install)
+  [![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/cinderbrick1212/Noclip-Desktop?tab=readme-ov-file#install)
   <br>
-  [![Github All Releases](https://img.shields.io/github/downloads/AmberSahdev/Open-Interface/total.svg)]((https://github.com/AmberSahdev/Open-Interface/releases/latest))
-  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AmberSahdev/Open-Interface)
-  ![GitHub Repo stars](https://img.shields.io/github/stars/AmberSahdev/Open-Interface)
-  ![GitHub](https://img.shields.io/github/license/AmberSahdev/Open-Interface) 
-  [![GitHub Latest Release)](https://img.shields.io/github/v/release/AmberSahdev/Open-Interface)](https://github.com/AmberSahdev/Open-Interface/releases/latest)
+  [![Github All Releases](https://img.shields.io/github/downloads/cinderbrick1212/Noclip-Desktop/total.svg)]((https://github.com/cinderbrick1212/Noclip-Desktop/releases/latest))
+  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cinderbrick1212/Noclip-Desktop)
+  ![GitHub Repo stars](https://img.shields.io/github/stars/cinderbrick1212/Noclip-Desktop)
+  ![GitHub](https://img.shields.io/github/license/cinderbrick1212/Noclip-Desktop) 
+  [![GitHub Latest Release)](https://img.shields.io/github/v/release/cinderbrick1212/Noclip-Desktop)](https://github.com/cinderbrick1212/Noclip-Desktop/releases/latest)
 
 </div>
 
@@ -34,7 +34,7 @@ Open Interface
 *clipped, 2x*
 
 <details>
-    <summary><a href="https://github.com/AmberSahdev/Open-Interface/blob/main/MEDIA.md#demos">More Demos</a></summary>
+    <summary><a href="https://github.com/cinderbrick1212/Noclip-Desktop/blob/main/MEDIA.md#demos">More Demos</a></summary>
     <ul>
 	    <li>
 		    "Make me a meal plan in Google Docs"
@@ -53,8 +53,8 @@ Open Interface
 <details>
     <summary><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Apple_Computer_Logo_rainbow.svg/960px-Apple_Computer_Logo_rainbow.svg.png?20250629104313" alt="MacOS Logo" width="13" height="15"> <b>MacOS</b></summary>
     <ul>
-        <li>Download the MacOS binary from the latest <a href="https://github.com/AmberSahdev/Open-Interface/releases/latest">release</a>.</li>
-        <li>Unzip the file and move Open Interface to the Applications Folder.<br><br> 
+        <li>Download the MacOS binary from the latest <a href="https://github.com/cinderbrick1212/Noclip-Desktop/releases/latest">release</a>.</li>
+        <li>Unzip the file and move Noclip Desktop to the Applications Folder.<br><br> 
             <img src="assets/macos_unzip_move_to_applications.png" width="350" style="border-radius: 10px;
     border: 3px solid black;">
         </li>
@@ -63,7 +63,7 @@ Open Interface
     <summary><b>Apple Silicon M-Series Macs</b></summary>
     <ul>
       <li>
-        Open Interface will ask you for Accessibility access to operate your keyboard and mouse for you, and Screen Recording access to take screenshots to assess its progress.<br>
+        Noclip Desktop will ask you for Accessibility access to operate your keyboard and mouse for you, and Screen Recording access to take screenshots to assess its progress.<br>
       </li>
       <li>
         In case it doesn't, manually add these permission via <b>System Settings</b> -> <b>Privacy and Security</b>
@@ -80,7 +80,7 @@ Open Interface
     <ul>
         <li>
             Launch the app from the Applications folder.<br>
-            You might face the standard Mac <i>"Open Interface cannot be opened" error</i>.<br><br>
+            You might face the standard Mac <i>"Noclip Desktop cannot be opened" error</i>.<br><br>
             <img src="assets/macos_unverified_developer.png" width="200" style="border-radius: 10px;
     border: 3px solid black;"><br>
             In that case, press <b><i><ins>"Cancel"</ins></i></b>.<br>
@@ -94,7 +94,7 @@ Open Interface
         </li>
         <br>
         <li>
-        Open Interface will also need Accessibility access to operate your keyboard and mouse for you, and Screen Recording access to take screenshots to assess its progress.<br><br>
+        Noclip Desktop will also need Accessibility access to operate your keyboard and mouse for you, and Screen Recording access to take screenshots to assess its progress.<br><br>
         <img src="assets/macos_accessibility.png" width="400" style="margin: 5px; border-radius: 10px;
     border: 3px solid black;"><br>
         <img src="assets/macos_screen_recording.png" width="400" style="margin: 5px; border-radius: 10px;
@@ -103,33 +103,33 @@ Open Interface
       </ul>
 </details>
       <ul>
-        <li>Lastly, checkout the <a href="#setup">Setup</a> section to connect Open Interface to your preferred LLM provider.</li>
+        <li>Lastly, checkout the <a href="#setup">Setup</a> section to connect Noclip Desktop to your preferred LLM provider.</li>
     </ul>
 </details>
 <details>
     <summary><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png" alt="Linux Logo" width="18" height="18"> <b>Linux</b></summary>
     <ul>
         <li>Linux binary has been tested on Ubuntu 20.04 so far.</li>
-        <li>Download the Linux zip file from the latest <a href="https://github.com/AmberSahdev/Open-Interface/releases/latest">release</a>.</li>
+        <li>Download the Linux zip file from the latest <a href="https://github.com/cinderbrick1212/Noclip-Desktop/releases/latest">release</a>.</li>
         <li>
-            Extract the executable and checkout the <a href="https://github.com/AmberSahdev/Open-Interface?tab=readme-ov-file#setup">Setup</a> section to connect Open Interface to your preferred LLM provider.</li>
+            Extract the executable and checkout the <a href="https://github.com/cinderbrick1212/Noclip-Desktop?tab=readme-ov-file#setup">Setup</a> section to connect Noclip Desktop to your preferred LLM provider.</li>
     </ul>
 </details>
 <details>
     <summary><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" alt="Linux Logo" width="15" height="15"> <b>Windows</b></summary>
     <ul>
 	<li>Windows binary has been tested on Windows 10.</li>
-	<li>Download the Windows zip file from the latest <a href="https://github.com/AmberSahdev/Open-Interface/releases/latest">release</a>.</li>
+	<li>Download the Windows zip file from the latest <a href="https://github.com/cinderbrick1212/Noclip-Desktop/releases/latest">release</a>.</li>
 	<li>Unzip the folder, move the exe to the desired location, double click to open, and voila.</li>
-	<li>Checkout the <a href="https://github.com/AmberSahdev/Open-Interface?tab=readme-ov-file#setup">Setup</a> section to connect Open Interface to your preferred LLM provider.</li>
+	<li>Checkout the <a href="https://github.com/cinderbrick1212/Noclip-Desktop?tab=readme-ov-file#setup">Setup</a> section to connect Noclip Desktop to your preferred LLM provider.</li>
     </ul>
 </details>
 
 <details>
     <summary><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/120px-Python-logo-notext.svg.png?20250701090410" alt="Python Logo" width="15" height="15"> <b>Run as a Script</b></summary>
     <ul>
-	  <li>Clone the repo <code>git clone https://github.com/AmberSahdev/Open-Interface.git</code></li>
-      <li>Enter the directory <code>cd Open-Interface</code></li>
+	  <li>Clone the repo <code>git clone https://github.com/cinderbrick1212/Noclip-Desktop.git</code></li>
+      <li>Enter the directory <code>cd Noclip-Desktop</code></li>
       <li><b>Optionally</b> use a Python virtual environment 
         <ul>
           <li><code>python -m venv .venv</code></li> 
@@ -144,7 +144,7 @@ Open Interface
 
 ### <ins id="setup">Setup</ins> 🛠️
 
-Open Interface supports multiple LLM providers. Configure your preferred provider in the **⚙️ Settings** tab of the web UI.
+Noclip Desktop supports multiple LLM providers. Configure your preferred provider in the **⚙️ Settings** tab of the web UI.
 
 | Provider | Models | API Key Source |
 |----------|--------|----------------|
@@ -157,7 +157,7 @@ Open Interface supports multiple LLM providers. Configure your preferred provide
 <details>
     <summary><b>Quick Start</b></summary>
 
-1. Launch Open Interface (`python app/app.py` or run the executable).
+1. Launch Noclip Desktop (`python app/app.py` or run the executable).
 2. Go to the **⚙️ Settings** tab in the web UI.
 3. Under **🤖 LLM Mode & Provider**, select your provider and model.
 4. Under **🔑 API Keys**, paste your API key for the selected provider.
