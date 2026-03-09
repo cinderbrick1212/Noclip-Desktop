@@ -17,7 +17,6 @@ moviepy==1.0.3
 openai==1.66.3
 packaging==24.2
 pillow==11.1.0
-PyAudio==0.2.14
 PyAutoGUI==0.9.54
 PyGetWindow==0.0.9
 pyinstaller==6.11.0
