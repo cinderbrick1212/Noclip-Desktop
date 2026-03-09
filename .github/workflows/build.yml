@@ -29,34 +29,39 @@ permissions:
   contents: write
 
 jobs:
+  # ── Filter: compute which OS entries to include in the build matrix ──
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.compute.outputs.matrix }}
+    steps:
+      - id: compute
+        shell: bash
+        run: |
+          WINDOWS='{"os_name":"Windows","runner":"windows-latest","artifact_suffix":"Windows","pyinstaller_sep":";","exe_name":"Open Interface.exe"}'
+          MACOS='{"os_name":"macOS","runner":"macos-latest","artifact_suffix":"macOS","pyinstaller_sep":":","exe_name":"Open Interface"}'
+          LINUX='{"os_name":"Linux","runner":"ubuntu-latest","artifact_suffix":"Linux","pyinstaller_sep":":","exe_name":"Open Interface"}'
+
+          OS="${{ github.event.inputs.os }}"
+          EVENT="${{ github.event_name }}"
+
+          # Empty OS means tag-push (no workflow_dispatch input); build all.
+          if [[ "$EVENT" == "push" || "$OS" == "All" || "$OS" == "" ]]; then
+            echo "matrix={\"include\":[$WINDOWS,$MACOS,$LINUX]}" >> "$GITHUB_OUTPUT"
+          elif [[ "$OS" == "Windows" ]]; then
+            echo "matrix={\"include\":[$WINDOWS]}" >> "$GITHUB_OUTPUT"
+          elif [[ "$OS" == "macOS" ]]; then
+            echo "matrix={\"include\":[$MACOS]}" >> "$GITHUB_OUTPUT"
+          else
+            echo "matrix={\"include\":[$LINUX]}" >> "$GITHUB_OUTPUT"
+          fi
+
   # ── Build matrix ──────────────────────────────────────────────────
   build:
+    needs: filter
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - os_name: Windows
-            runner: windows-latest
-            artifact_suffix: Windows
-            pyinstaller_sep: ';'
-            exe_name: 'Open Interface.exe'
-          - os_name: macOS
-            runner: macos-latest
-            artifact_suffix: macOS
-            pyinstaller_sep: ':'
-            exe_name: 'Open Interface'
-          - os_name: Linux
-            runner: ubuntu-latest
-            artifact_suffix: Linux
-            pyinstaller_sep: ':'
-            exe_name: 'Open Interface'
-
-    # Skip matrix entries that don't match the user's OS selection
-    # (when triggered manually). On tag pushes, build all.
-    if: >-
-      github.event_name == 'push' ||
-      github.event.inputs.os == 'All' ||
-      github.event.inputs.os == matrix.os_name
+      matrix: ${{ fromJSON(needs.filter.outputs.matrix) }}
 
     runs-on: ${{ matrix.runner }}
     name: Build – ${{ matrix.os_name }}
