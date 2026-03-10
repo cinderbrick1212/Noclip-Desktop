@@ -25,6 +25,15 @@ Noclip Desktop lets you control your computer just by describing what you want �
 
 ---
 
+## 🖥️ UI
+
+<div align="center">
+  <img src="assets/ui0.9.0_chat.png" alt="Noclip Desktop Chat UI v0.9.0" width="860" style="border-radius: 10px; border: 2px solid #ccc; margin: 8px;">
+  <img src="assets/ui0.9.0_settings.png" alt="Noclip Desktop Settings UI v0.9.0" width="860" style="border-radius: 10px; border: 2px solid #ccc; margin: 8px;">
+</div>
+
+---
+
 ## ✨ Features
 
 - **Natural language control** — just describe what you want done
