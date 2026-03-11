@@ -128,10 +128,7 @@ Noclip Desktop lets you control your computer just by describing what you want â
   <ul>
     <li>Tested on Windows 10.</li>
     <li>Download the Windows zip from the latest <a href="https://github.com/cinderbrick1212/Noclip-Desktop/releases/latest">release</a>.</li>
-    <li>Unzip the folder to your preferred location.
-      <br><b>Important:</b> keep all the files together â€” do not move just the <code>.exe</code> out of the folder.
-    </li>
-    <li>Double-click <code>Noclip Desktop.exe</code> inside the unzipped folder to launch.</li>
+    <li>Unzip the folder, move the exe to your preferred location, and double-click to launch.</li>
     <li>See the <a href="#setup">Setup</a> section to connect Noclip Desktop to your LLM provider.</li>
   </ul>
 </details>

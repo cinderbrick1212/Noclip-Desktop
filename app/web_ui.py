@@ -15,7 +15,6 @@ thread and streams status updates from ``Core.status_queue`` back to
 the chatbot via Gradio's generator protocol.
 """
 
-import os
 import queue
 import threading
 from pathlib import Path
@@ -81,15 +80,11 @@ class WebUI:
 
     def run(self, **kwargs):
         """Launch the Gradio web server."""
-        # When the Python server is spawned by the Electron wrapper it sets
-        # NOCLIP_ELECTRON=1.  In that case the Electron BrowserWindow already
-        # displays the UI, so we must NOT open an additional browser tab.
-        _inbrowser = not os.environ.get('NOCLIP_ELECTRON')
         self.demo.launch(
             server_name='127.0.0.1',
             server_port=7860,
             share=False,
-            inbrowser=_inbrowser,
+            inbrowser=True,
             theme=gr.themes.Soft(primary_hue='violet'),
             **kwargs,
         )
