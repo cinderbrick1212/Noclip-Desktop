@@ -35,7 +35,13 @@ https://github.com/cinderbrick1212/Noclip-Desktop/assets/23853621/424f61ad-5ee6-
 
 ## Images:
 
-UI and Custom LLM Models:
+UI v0.9.0 — Chat Tab:
+![Noclip Desktop Chat UI v0.9.0](assets/ui0.9.0_chat.png)
+
+UI v0.9.0 — Settings Tab:
+![Noclip Desktop Settings UI v0.9.0](assets/ui0.9.0_settings.png)
+
+UI and Custom LLM Models (v0.8.0):
 ![Noclip Desktop UI - Custom Models](assets/ui0.8.0.png)
 
 Making a Web App:
