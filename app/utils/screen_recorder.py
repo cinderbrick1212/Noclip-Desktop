@@ -19,6 +19,7 @@ Thread-safety: all public methods acquire an internal lock.
 """
 
 import base64
+import os
 import tempfile
 import threading
 from collections import deque
@@ -133,17 +134,27 @@ class FrameBuffer:
 
         clip = ImageSequenceClip(np_frames, fps=self._fps)
 
-        # Write to a temporary file (moviepy needs a real file for MP4)
-        with tempfile.NamedTemporaryFile(suffix='.mp4') as tmp:
+        # Write to a temporary file (moviepy needs a real file for MP4).
+        # Use NamedTemporaryFile(delete=False) + explicit close so the path is
+        # created atomically (no TOCTOU race) but the file handle is released
+        # before moviepy tries to open the same path.  On Windows a
+        # NamedTemporaryFile context manager holds an exclusive lock that
+        # prevents re-opening the same path, so we must close it first.
+        with tempfile.NamedTemporaryFile(suffix='.mp4', delete=False) as tmp:
+            tmp_path = tmp.name
+        try:
             clip.write_videofile(
-                tmp.name,
+                tmp_path,
                 codec='libx264',
                 audio=False,
                 logger=None,          # suppress moviepy's verbose output
                 preset='ultrafast',   # speed over compression
             )
-            tmp.seek(0)
-            video_data = tmp.read()
+            with open(tmp_path, 'rb') as f:
+                video_data = f.read()
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
 
         clip.close()
         return video_data
