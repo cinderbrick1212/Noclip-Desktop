@@ -55,8 +55,6 @@ _SEP = ";" if platform.system() == "Windows" else ":"
 # Human-readable name and the on-disk executable name
 _APP_NAME = "Noclip Desktop"
 _EXE_NAME = f"{_APP_NAME}.exe" if platform.system() == "Windows" else _APP_NAME
-# With --onedir, PyInstaller creates dist/<_APP_NAME>/ containing the executable.
-_DIST_APP_DIR = os.path.join("dist", _APP_NAME)
 
 
 def setup(include_node: bool = False) -> None:
@@ -92,10 +90,7 @@ def compile_server(signing_key: str | None = None) -> None:
         "--noconfirm",
         f"--name={_APP_NAME}",
         "--icon=app/resources/icon.png",
-        # --onedir (the default) is preferred over --onefile on Windows:
-        #   • no per-run extraction to TEMP, so startup is near-instant
-        #   • less likely to be quarantined by antivirus software
-        "--onedir",
+        "--onefile",
         # Hidden imports required for successful packaging
         "--hidden-import=pyautogui",
         "--hidden-import=appdirs",
@@ -131,7 +126,7 @@ def compile_server(signing_key: str | None = None) -> None:
         pyinstaller_options.append("--hidden-import=PIL._tkinter_finder")
 
     PyInstaller.__main__.run(pyinstaller_options)
-    print(f"==> Server app directory written to {_DIST_APP_DIR}/")
+    print(f"==> Server executable written to dist/{_EXE_NAME}")
 
 
 def build_electron() -> None:
@@ -139,16 +134,13 @@ def build_electron() -> None:
     Build the Electron desktop app wrapper around the server executable.
 
     Requires:
-    - The server app directory already built in dist/<APP_NAME>/
+    - The server executable already built in dist/
     - Node.js ≥ 20 with npm available on PATH
     """
     server_bundle_dir = os.path.join("dist", "noclip-desktop-server")
-    # Copy the entire --onedir app directory (exe + _internal/) so the server
-    # binary and all its supporting files are available to the Electron wrapper.
-    if os.path.exists(server_bundle_dir):
-        shutil.rmtree(server_bundle_dir)
-    shutil.copytree(_DIST_APP_DIR, server_bundle_dir)
-    print(f"==> Copied server app directory to {server_bundle_dir}/")
+    os.makedirs(server_bundle_dir, exist_ok=True)
+    shutil.copy(os.path.join("dist", _EXE_NAME), server_bundle_dir)
+    print(f"==> Copied server binary to {server_bundle_dir}/")
 
     print("==> Installing Electron npm dependencies …")
     subprocess.check_call(["npm", "install"], cwd="electron")
@@ -205,14 +197,12 @@ def create_zip() -> str:
         ], cwd="dist")
     elif system == "Linux":
         zip_name = f"{base}-Linux.zip"
-        # Zip the entire --onedir app folder so all supporting files are included.
         subprocess.check_call(["zip", "-r9", zip_name, _APP_NAME], cwd="dist")
     elif system == "Windows":
         zip_name = f"{base}-Windows.zip"
-        # Compress-Archive the entire app directory (not just the exe).
         subprocess.check_call([
             "powershell", "Compress-Archive",
-            "-Path", _APP_NAME,
+            "-Path", f"{_APP_NAME}.exe",
             "-DestinationPath", zip_name,
         ], cwd="dist")
     else:

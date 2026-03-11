@@ -38,9 +38,9 @@ jobs:
       - id: compute
         shell: bash
         run: |
-          WINDOWS='{"os_name":"Windows","runner":"windows-latest","artifact_suffix":"Windows","pyinstaller_sep":";","app_dir":"Noclip Desktop","exe_name":"Noclip Desktop.exe"}'
-          MACOS='{"os_name":"macOS","runner":"macos-latest","artifact_suffix":"macOS","pyinstaller_sep":":","app_dir":"Noclip Desktop","exe_name":"Noclip Desktop"}'
-          LINUX='{"os_name":"Linux","runner":"ubuntu-latest","artifact_suffix":"Linux","pyinstaller_sep":":","app_dir":"Noclip Desktop","exe_name":"Noclip Desktop"}'
+          WINDOWS='{"os_name":"Windows","runner":"windows-latest","artifact_suffix":"Windows","pyinstaller_sep":";","exe_name":"Noclip Desktop.exe"}'
+          MACOS='{"os_name":"macOS","runner":"macos-latest","artifact_suffix":"macOS","pyinstaller_sep":":","exe_name":"Noclip Desktop"}'
+          LINUX='{"os_name":"Linux","runner":"ubuntu-latest","artifact_suffix":"Linux","pyinstaller_sep":":","exe_name":"Noclip Desktop"}'
 
           OS="${{ github.event.inputs.os }}"
           EVENT="${{ github.event_name }}"
@@ -106,7 +106,7 @@ jobs:
               '--noconfirm',
               '--name=Noclip Desktop',
               '--icon=app/resources/icon.png',
-              '--onedir',
+              '--onefile',
               '--hidden-import=pyautogui',
               '--hidden-import=appdirs',
               '--hidden-import=pyparsing',
@@ -144,10 +144,8 @@ jobs:
           github.event_name == 'push'
         shell: bash
         run: |
-          # Copy the entire --onedir app folder (exe + _internal/) into the
-          # noclip-desktop-server staging directory used by electron-builder.
-          rm -rf dist/noclip-desktop-server
-          cp -r "dist/${{ matrix.app_dir }}" dist/noclip-desktop-server
+          mkdir -p dist/noclip-desktop-server
+          cp "dist/${{ matrix.exe_name }}" dist/noclip-desktop-server/
 
       - name: Install Electron dependencies
         if: >-
@@ -179,8 +177,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Noclip-Desktop-Server-${{ matrix.artifact_suffix }}
-          # Upload the entire --onedir folder so all supporting files are included.
-          path: dist/${{ matrix.app_dir }}
+          path: dist/${{ matrix.exe_name }}
 
       - name: Upload Electron artifact
         if: >-
@@ -198,11 +195,11 @@ jobs:
         run: |
           cd dist
           if [ "${{ matrix.os_name }}" = "Windows" ]; then
-            powershell Compress-Archive -Path '${{ matrix.app_dir }}' \
+            powershell Compress-Archive -Path '"${{ matrix.exe_name }}"' \
               -DestinationPath "Noclip-Desktop-${{ github.ref_name }}-${{ matrix.artifact_suffix }}-Server.zip"
           else
             zip -r9 "Noclip-Desktop-${{ github.ref_name }}-${{ matrix.artifact_suffix }}-Server.zip" \
-              "${{ matrix.app_dir }}"
+              "${{ matrix.exe_name }}"
           fi
 
       - name: Upload release assets

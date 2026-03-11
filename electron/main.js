@@ -13,10 +13,7 @@ const http = require('http');
 const SERVER_PORT = 7860;
 const SERVER_URL = `http://127.0.0.1:${SERVER_PORT}`;
 const POLL_INTERVAL_MS = 500;
-// Allow up to 2 minutes for the server to start.
-// PyInstaller --onedir apps can take 60+ seconds on first launch (antivirus
-// scanning, Python initialisation) so a generous timeout is important.
-const MAX_WAIT_MS = 120000;
+const MAX_WAIT_MS = 30000;
 
 let mainWindow = null;
 let serverProcess = null;
@@ -48,9 +45,7 @@ function startServer() {
 
   serverProcess = spawn(serverPath, [], {
     stdio: ['ignore', 'pipe', 'pipe'],
-    // NOCLIP_ELECTRON tells the Python server it is running inside the
-    // Electron wrapper so it should not try to open an extra browser window.
-    env: { ...process.env, NOCLIP_ELECTRON: '1' },
+    env: { ...process.env },
   });
 
   serverProcess.stdout.on('data', (data) => {

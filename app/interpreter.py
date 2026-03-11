@@ -91,9 +91,7 @@ class Interpreter:
 
         # Sometimes pyautogui needs warming up i.e. sometimes first call isn't executed hence padding a random call here
         if not self._warmed_up:
-            # Use a no-op mouse movement so the warmup works on all platforms
-            # (the "command" key is macOS-only and raises an error on Windows/Linux)
-            pyautogui.moveRel(0, 0)
+            pyautogui.press("command", interval=0.2)
             self._warmed_up = True
 
         if hasattr(pyautogui, function_name):
