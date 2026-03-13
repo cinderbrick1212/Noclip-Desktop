@@ -105,6 +105,7 @@ def compile_server(signing_key: str | None = None) -> None:
         "--hidden-import=uvicorn",
         "--collect-all=gradio",
         "--collect-all=gradio_client",
+        "--collect-all=safehttpx",
         # Additional LLM providers
         "--hidden-import=anthropic",
         # Multi-monitor detection
