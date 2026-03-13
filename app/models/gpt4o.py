@@ -4,6 +4,7 @@ from typing import Any
 from models.model import Model
 from openai.types.beta.threads.message import Message
 from utils.screen import Screen
+from utils.parse_llm_response import parse_json_from_llm_text
 
 
 # TODO
@@ -111,16 +112,7 @@ class GPT4o(Model):
 
         # Our current LLM model does not guarantee a JSON response hence we manually parse the JSON part of the response
         # Check for updates here - https://platform.openai.com/docs/guides/text-generation/json-mode
-        start_index = llm_response_data.find('{')
-        end_index = llm_response_data.rfind('}')
-
-        try:
-            json_response = json.loads(llm_response_data[start_index:end_index + 1].strip())
-        except Exception as e:
-            print(f'Error while parsing JSON response - {e}')
-            json_response = {}
-
-        return json_response
+        return parse_json_from_llm_text(llm_response_data)
 
     def cleanup(self):
         # Note: Cannot delete screenshots while the thread is active. Cleanup during shut down.

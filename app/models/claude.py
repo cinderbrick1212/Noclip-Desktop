@@ -8,6 +8,7 @@ import os
 from typing import Any
 
 from utils.screen import Screen
+from utils.parse_llm_response import parse_json_from_llm_text
 
 
 class Claude:
@@ -71,15 +72,7 @@ class Claude:
                 text += block.text
         text = text.strip()
 
-        start_index = text.find('{')
-        end_index = text.rfind('}')
-
-        try:
-            return json.loads(text[start_index:end_index + 1].strip())
-        except Exception as e:
-            print(f'Error parsing Claude response: {e}')
-            print(f'Raw response text: {text[:500]}')
-            return {}
+        return parse_json_from_llm_text(text)
 
     def cleanup(self):
         pass

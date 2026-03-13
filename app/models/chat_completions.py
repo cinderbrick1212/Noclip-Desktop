@@ -11,6 +11,7 @@ from typing import Any
 
 from models.model import Model
 from utils.screen import Screen
+from utils.parse_llm_response import parse_json_from_llm_text
 
 
 class ChatCompletionsModel(Model):
@@ -58,13 +59,4 @@ class ChatCompletionsModel(Model):
         self, response: Any
     ) -> dict[str, Any]:
         text = response.choices[0].message.content.strip()
-
-        start_index = text.find('{')
-        end_index = text.rfind('}')
-
-        try:
-            return json.loads(text[start_index:end_index + 1].strip())
-        except Exception as e:
-            print(f'Error parsing Chat Completions response: {e}')
-            print(f'Raw response text: {text[:500]}')
-            return {}
+        return parse_json_from_llm_text(text)

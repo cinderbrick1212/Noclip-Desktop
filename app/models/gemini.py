@@ -5,6 +5,7 @@ from typing import Any
 from google import genai
 from google.genai import types
 from utils.screen import Screen
+from utils.parse_llm_response import parse_json_from_llm_text
 
 
 class Gemini:
@@ -54,17 +55,7 @@ class Gemini:
 
     def convert_llm_response_to_json_instructions(self, llm_response) -> dict[str, Any]:
         llm_response_data = llm_response.text.strip()
-
-        start_index = llm_response_data.find("{")
-        end_index = llm_response_data.rfind("}")
-
-        try:
-            json_response = json.loads(llm_response_data[start_index:end_index + 1].strip())
-        except Exception as e:
-            print(f"Error while parsing JSON response - {e}")
-            json_response = {}
-
-        return json_response
+        return parse_json_from_llm_text(llm_response_data)
 
     def cleanup(self):
         pass

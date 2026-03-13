@@ -6,6 +6,17 @@ from typing import Any
 import pyautogui
 
 
+# Only these pyautogui functions are allowed to be called by the LLM.
+# This prevents prompt injection attacks from executing arbitrary functions.
+_ALLOWED_PYAUTOGUI_FUNCTIONS = frozenset({
+    'click', 'doubleClick', 'rightClick', 'middleClick',
+    'moveTo', 'moveRel', 'dragTo', 'dragRel',
+    'write', 'typewrite',
+    'press', 'keyDown', 'keyUp', 'hotkey',
+    'scroll', 'hscroll', 'vscroll',
+})
+
+
 class Interpreter:
     def __init__(self, status_queue: Queue):
         # MP Queue to put current status of execution in while processes commands.
@@ -94,7 +105,7 @@ class Interpreter:
             pyautogui.press("command", interval=0.2)
             self._warmed_up = True
 
-        if hasattr(pyautogui, function_name):
+        if function_name in _ALLOWED_PYAUTOGUI_FUNCTIONS and hasattr(pyautogui, function_name):
             # Execute the corresponding pyautogui function i.e. Keyboard or Mouse commands.
             function_to_call = getattr(pyautogui, function_name)
 
@@ -123,5 +134,7 @@ class Interpreter:
             else:
                 # For other functions, pass the parameters as they are
                 function_to_call(**parameters)
+        elif hasattr(pyautogui, function_name):
+            print(f'Blocked disallowed function: {function_name}')
         else:
             print(f'No such function {function_name} in our interface\'s interpreter')

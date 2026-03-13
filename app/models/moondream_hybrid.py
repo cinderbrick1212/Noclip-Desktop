@@ -4,7 +4,7 @@ import re
 from concurrent.futures import Future, ThreadPoolExecutor
 from typing import Any, Optional
 
-import moondream as md
+
 from google import genai
 from google.genai import types
 from PIL import Image
@@ -12,6 +12,7 @@ from PIL import Image
 from models.model import Model
 from utils.grid import create_gridded_screenshot, gridded_screenshot_to_base64
 from utils.screen import Screen
+from utils.parse_llm_response import parse_json_from_llm_text
 from utils.screen_recorder import DEFAULT_VIDEO_FPS, FrameBuffer
 from utils.settings import Settings
 
@@ -86,6 +87,7 @@ class MoondreamHybrid(Model):
     """
 
     def __init__(self, model_name, base_url, api_key, context, screen=None):
+        import moondream as md  # Lazy import — managed via Ollama
         super().__init__(model_name, base_url, api_key, context, screen)
 
         settings = Settings().get_dict()
@@ -413,17 +415,7 @@ class MoondreamHybrid(Model):
 
     def _parse_api_response(self, llm_response: Any) -> dict[str, Any]:
         response_text = llm_response.text.strip()
-
-        start_index = response_text.find('{')
-        end_index = response_text.rfind('}')
-
-        try:
-            return json.loads(
-                response_text[start_index:end_index + 1].strip()
-            )
-        except Exception as e:
-            print(f'Error parsing Gemini Flash response: {e}')
-            return {}
+        return parse_json_from_llm_text(response_text)
 
     def cleanup(self):
         self.cancel_prefetch()

@@ -8,6 +8,7 @@ from interpreter import Interpreter
 from llm import LLM
 from utils.screen import Screen
 from utils.settings import Settings
+MAX_STEPS = 30
 
 
 class Core:
@@ -59,6 +60,11 @@ class Core:
                 Also, it is needed because the LLM we are using doesn't have a stateful/assistant mode.
         """
         self.interrupt_execution = False
+
+        if step_num >= MAX_STEPS:
+            status = f'Reached maximum step limit ({MAX_STEPS}). Stopping to prevent infinite loop.'
+            self.status_queue.put(status)
+            return status
 
         if not self.llm:
             status = 'Set your OpenAPI API Key in Settings and Restart the App'
